@@ -75,7 +75,7 @@ Ensure the following are installed:
 
 ```bash
 git clone https://github.com/Stephendsouzaa/StarLight-Tacker.git
-cd StarLight-Tacker
+
 
 
 This README now includes comprehensive instructions, feature details, and troubleshooting tips. Let me know if you need any further additions!
