@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-align: center;
+    background-color: black; /* Set background to black */
+}
+
+h1 {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    font-size: 48px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-top: 50px;
+}
+
+#upload-form {
+    margin-top: 100px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+input[type="file"],
+button {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button {
+    background-color: #5500ff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3300aa;
+}
+
+video, canvas {
+    display: none; /* Hide the video and canvas initially */
+}

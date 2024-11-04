@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constellation Identifier</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="content">
+        <br>
+        <h1>Constellation Identifier</h1><br><br>
+
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" id="file-input" accept="image/*" required>
+            <br><h2>Or</h2><br>
+            <button type="button" onclick="openCamera()">Open Camera</button>
+            <button type="button" onclick="capturePhoto()">Capture Photo</button>
+
+            <video id="camera" width="300" height="300" autoplay></video>
+            <canvas id="canvas" width="300" height="300"></canvas>
+
+            <br><br><button type="submit">Upload Image</button>
+        </form>
+    </div>
+
+    <script>
+        let videoStream;
+
+        function openCamera() {
+            const video = document.getElementById('camera');
+            video.style.display = 'block';
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    videoStream = stream;
+                })
+                .catch(error => {
+                    console.error("Error accessing camera: ", error);
+                    alert("Could not access the camera. Please try again or check permissions.");
+                });
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('camera');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                const file = new File([blob], "captured_photo.png", { type: "image/png" });
+
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('file-input').files = dataTransfer.files;
+
+                videoStream.getTracks().forEach(track => track.stop());
+                video.style.display = 'none';
+            });
+        }
+    </script>
+
+    <!-- Three.js Cosmic Background Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        renderer.setClearColor(0x000000); // Set the background color to black
+
+        // Create a star field
+        const starsGeometry = new THREE.BufferGeometry();
+        const starCount = 5000;
+        const positions = new Float32Array(starCount * 3);
+
+        for (let i = 0; i < starCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 2000; // X position
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 2000; // Y position
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 2000; // Z position
+        }
+
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        camera.position.z = 10;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            stars.rotation.y += 0.001; // Rotate stars for a twinkling effect
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

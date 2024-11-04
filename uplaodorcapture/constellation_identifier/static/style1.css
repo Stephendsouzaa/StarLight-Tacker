@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow: hidden; /* Prevents overflow from the body */
+    height: 100vh; /* Full height for body */
+    position: relative; /* For positioning content */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.8em;
+    margin: 20px 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+p {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 10px 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+img {
+    display: block;
+    margin: 0 auto; /* Center the image */
+    border: 2px solid white; /* Add a border for better visibility */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Subtle glow effect */
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.5em;
+    color: #61dafb; /* Light blue color */
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #61dafb; /* Border matching link color */
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+    background: #61dafb;
+    color: black; /* Change text color on hover */
+}
+
+.content {
+    position: absolute; /* Allow content to overlap the background */
+    z-index: 10; /* Ensure content is above the 3D background */
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    border-radius: 10px;
+    max-width: 600px; /* Limit max width */
+    margin: 50px auto; /* Center content block with top margin */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Shadow for depth */
+}
